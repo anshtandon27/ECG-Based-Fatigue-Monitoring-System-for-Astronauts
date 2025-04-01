@@ -1,23 +1,28 @@
 function HBDuration = Duration(time, E)
     fs = 2000;
-    [~, Rlocs] = findpeaks(E, 'MinPeakHeight', 0.3);
+    M = 12000;
+    N = 18000;
+    time = time(M:N);
+    E = E(M:N);
+
+    [~, Rlocs] = findpeaks(E, 'MinPeakHeight', 0.7);
     windowB = round(0.2*fs);
     windowA = round(0.35*fs);
     numPeaks = length(Rlocs);
     
-    Qlocs = [];
+    Plocs = [];
     Tlocs = [];
-    for i = 2:numPeaks-1
+    for i = 1:numPeaks-1
         loc = Rlocs(i);
-        [~, Q_idx] = min(E(loc-windowB:loc-0.1*fs));
-        Q_idx = loc - windowB + Q_idx - 1;
+        [~, P_idx] = min(E(loc-windowB:loc-0.1*fs));
+        P_idx = loc - windowB + P_idx - 1;
         [~, T_idx] = min(E(loc+windowB:loc+windowA));
         T_idx = loc + T_idx + windowB - 1;
     
-        Qlocs = [Qlocs, Q_idx];
+        Plocs = [Plocs, P_idx];
         Tlocs = [Tlocs, T_idx];
     end
-    
+
     HBDuration = time(Tlocs) - time(Qlocs);
     avg = mean(HBDuration*60);
     stdev = std(HBDuration*60);
