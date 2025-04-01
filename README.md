@@ -29,6 +29,7 @@ Space exploration presents unique physiological challenges for astronauts, inclu
 ## Code Functionality
 ### Signal Filtering
 - **ecgFilter.m:** Implements a digital bandpass filter (0.7-20 Hz) using a Butterworth filter to clean ECG signals
+- **breathFilter.m:** Implements a lowpass filter (<0.5 Hz) using a Butterworth filter to extract breathing signals
 - **highPassActive.m:** Implements a second-order active high-pass filter with a 50 Hz cutoff frequency using UAF42
 - **lowPassActive.m:** Implements a second-order active low-pass filter with a 50 Hz cutoff frequency using UAF42
 - **highPassRC.m:** Implements a passive RC high-pass filter for comparison with active filters
@@ -38,6 +39,7 @@ Space exploration presents unique physiological challenges for astronauts, inclu
 - **InstantaneousFinder.m:** Computes the instantaneous heart rate over time
 - **QTFinder.m:** Extracts the QT interval duration from the ECG signal
 - **Duration.m:** Measures the total heartbeat duration (Q-wave onset to T-wave offset)
+- **BreathFinder.m:** Calculates the average breathing rate from filtered breathing signal
 
 ### Visualization and Analysis
 - **Bodeplots.m:** Generates Bode plots comparing theoretical and experimental filter responses
